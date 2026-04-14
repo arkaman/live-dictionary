@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A sleek dictionary app with search, pronunciation, and suggestions." />
+    <title>Live Dictionary - Instant Word Lookup</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="dict.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-sun-moon-icon lucide-sun-moon">
+                <path d="M12 2v2" />
+                <path
+                    d="M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715" />
+                <path d="M16 12a4 4 0 0 0-4-4" />
+                <path d="m19 5-1.256 1.256" />
+                <path d="M20 12h2" />
+            </svg>
+        </button>
+
+        <h1>Dictionary</h1>
+
+        <!-- Search -->
+        <form id="search-box" class="search-box">
+            <input type="text" id="search-input" placeholder="Search a word..." autocomplete="off" />
+            <div id="suggestions" class="suggestions"></div>
+            <button type="submit" aria-label="Search word">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search-icon lucide-search">
+                    <path d="m21 21-4.34-4.34" />
+                    <circle cx="11" cy="11" r="8" />
+                </svg>
+            </button>
+        </form>
+
+        <!-- Status -->
+        <p id="loading">Loading...</p>
+        <p class="errTxt"></p>
+
+        <!-- Results -->
+        <section class="word-details" hidden>
+
+            <header class="word-header">
+                <div>
+                    <h2 id="word-txt"></h2>
+                    <div class="meta">
+                        <span id="type-txt"></span>
+                        <span id="phonetic-txt"></span>
+                    </div>
+                </div>
+
+                <button id="sound-btn" type="button" aria-label="Play pronunciation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-audio-lines-icon lucide-audio-lines">
+                        <path d="M2 10v3" />
+                        <path d="M6 6v11" />
+                        <path d="M10 3v18" />
+                        <path d="M14 8v7" />
+                        <path d="M18 5v13" />
+                        <path d="M22 10v3" />
+                    </svg>
+                </button>
+            </header>
+
+            <div class="grid">
+                <div class="card full">
+                    <h3>Definition</h3>
+                    <p id="definition-txt"></p>
+                </div>
+
+                <div class="card" id="example-elem">
+                    <h3>Example</h3>
+                    <p></p>
+                </div>
+
+                <div class="card" id="synonyms-elem">
+                    <h3>Synonyms</h3>
+                    <p></p>
+                </div>
+
+                <div class="card" id="antonyms-elem">
+                    <h3>Antonyms</h3>
+                    <p></p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

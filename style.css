@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 12px;
+    overflow: hidden;
+
+    background: radial-gradient(circle at top, #7f5af0, #14C49D, #16161a);
+    background-size: 400% 400%;
+    animation: bgShift 12s ease infinite;
+    color: #fff;
+}
+
+@keyframes bgShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body.dark {
+    background: #0b0b10;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+
+    padding: 18px;
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.45),
+        inset 0 0 25px rgba(255, 255, 255, 0.05);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow:
+        0 18px 60px rgba(0, 0, 0, 0.6),
+        inset 0 0 40px rgba(255, 255, 255, 0.08);
+}
+
+body.dark .container {
+    background: rgba(20, 20, 25, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+h1 {
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(127, 90, 240, 0.5);
+}
+
+.word-info h2 {
+    font-size: 38px;
+    font-weight: 600;
+
+    background: linear-gradient(90deg, #7f5af0, #2cb67d);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.container form :where(input, button) {
+    flex: 1;
+    padding: 0.55em;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.container form button {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    aspect-ratio: 1 / 1;
+}
+
+.container form input {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    outline: none;
+}
+
+.container form input:focus {
+    transform: scale(1.02);
+    border-color: #7f5af0;
+    box-shadow: 0 0 18px rgba(127, 90, 240, 0.5);
+}
+
+.container button {
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #7f5af0, #2cb67d);
+    color: white;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.container button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.container button:hover::after {
+    opacity: 1;
+}
+
+.container button:active {
+    transform: scale(0.92);
+}
+
+.search-box {
+    position: relative;
+}
+
+.suggestions {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    margin-top: 6px;
+
+    background: rgba(20, 20, 25, 0.95);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+
+    overflow: hidden;
+    z-index: 50;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    animation: dropIn 0.15s ease-out;
+}
+
+.suggestions div {
+    padding: 10px 12px;
+    cursor: pointer;
+
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.suggestions div:hover {
+    background: rgba(127, 90, 240, 0.25);
+    padding-left: 14px;
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.suggestions div:active {
+    transform: scale(0.98);
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#sound-btn {
+    animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(44, 182, 125, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(44, 182, 125, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(44, 182, 125, 0);
+    }
+}
+
+.word-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 20px;
+}
+
+.meta {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+#word-txt {
+    font-size: 40px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7f5af0, #2cb67d);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#sound-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    flex: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 12px 14px;
+
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.card p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.full {
+    grid-column: span 2;
+}
+
+.errTxt {
+    color: #ff4d6d;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(127, 90, 240, 0.4), transparent 70%);
+    filter: blur(50px);
+    animation: float 10s infinite ease-in-out;
+    pointer-events: none;
+}
+
+body::after {
+    top: 60%;
+    left: 70%;
+    animation-delay: 3s;
+}
+
+body::before {
+    top: 10%;
+    left: 15%;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
