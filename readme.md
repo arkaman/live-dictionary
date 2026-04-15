@@ -6,6 +6,12 @@ Built with the holy trinity of web development: HTML, CSS, and JavaScript. No fr
 
 ---
 
+## 🚀 Live Demo
+
+Try it here: [live-dictionary](https://live-dictionary.vercel.app)
+
+---
+
 ## 🎨 Features
 
 - Search any English word
