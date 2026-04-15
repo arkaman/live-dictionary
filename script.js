@@ -27,37 +27,48 @@ function debounce(fn, delay = 300) {
 
 const suggestionsBox = document.getElementById("suggestions");
 
+let allowSuggestions = true;
+let suggestionRequestId = 0;
+
 searchInput.addEventListener(
     "input",
     debounce(async () => {
         const q = searchInput.value.trim();
 
-        if (!q) {
-            suggestionsBox.style.display = "none";
-            suggestionsBox.innerHTML = "";
+        if (!q || !allowSuggestions) {
+            hideSuggestions();
             return;
         }
+
+        const currentId = ++suggestionRequestId;
 
         try {
             const res = await fetch(`https://api.datamuse.com/sug?s=${q}`);
             const data = await res.json();
 
+            if (currentId !== suggestionRequestId || !allowSuggestions) return;
+
             renderSuggestions(data);
         } catch {
-            suggestionsBox.style.display = "none";
+            if (currentId !== suggestionRequestId) return;
+            hideSuggestions();
         }
     }, 250)
 );
 
+searchInput.addEventListener("input", () => {
+    allowSuggestions = true;
+});
+
 document.addEventListener("click", (e) => {
     if (!searchBox.contains(e.target)) {
-        suggestionsBox.style.display = "none";
+        hideSuggestions();
     }
 });
 
 function renderSuggestions(list) {
-    if (!list.length) {
-        suggestionsBox.style.display = "none";
+    if (!allowSuggestions || !list.length) {
+        hideSuggestions();
         return;
     }
 
@@ -69,7 +80,7 @@ function renderSuggestions(list) {
 
         div.addEventListener("click", () => {
             searchInput.value = item.word;
-            suggestionsBox.style.display = "none";
+            hideSuggestions();
             searchBox.requestSubmit();
         });
 
@@ -154,6 +165,8 @@ function hideSuggestions() {
 searchBox.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    allowSuggestions = false;
+    suggestionRequestId++;
     hideSuggestions();
 
     const query = searchInput.value.trim();
@@ -163,16 +176,11 @@ searchBox.addEventListener("submit", async (e) => {
         return;
     }
 
-    errTxt.textContent = "";
-    wordDetailsElem.hidden = false;
-    wordDetailsElem.classList.remove("active");
-
     loading.style.display = "block";
 
     try {
         const data = await getWordDetails(query);
         renderWord(data);
-        hideSuggestions();
     } catch (err) {
         errTxt.textContent = "That word doesn’t exist… or reality disagrees.";
     } finally {
