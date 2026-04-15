@@ -136,6 +136,8 @@ async function getWordDetails(word) {
 }
 
 function renderWord(data) {
+    errTxt.textContent = "";
+
     wordDetailsElem.hidden = false;
 
     wordTxt.textContent = data.word;
