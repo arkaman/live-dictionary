@@ -5,19 +5,16 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
 }
 
-html,
-body {
-    width: 100%;
-    overflow-x: hidden;
+html, body {
+    overflow: hidden;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100dvh;
     padding: 12px;
-    overflow: hidden;
 
     background: radial-gradient(circle at top, #7f5af0, #14C49D, #16161a);
     background-size: 400% 400%;
@@ -83,15 +80,6 @@ h1 {
     font-weight: 600;
     color: #fff;
     text-shadow: 0 0 12px rgba(127, 90, 240, 0.5);
-}
-
-#word-txt {
-    font-size: 38px;
-    font-weight: 600;
-
-    background: linear-gradient(90deg, #7f5af0, #2cb67d);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .container form {
@@ -343,7 +331,8 @@ body::after {
 
 body::after {
     top: 60%;
-    left: 70%;
+    right: 0;
+    left: auto;
     animation-delay: 3s;
 }
 
